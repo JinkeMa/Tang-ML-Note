@@ -1,0 +1,7 @@
+{
+    "python.analysis.include": [
+        "D:\\\\ProgramData\\\\Anaconda3\\\\envs\\\\pytorch\\\\Lib\\\\site-packages",
+        "D:\\\\ProgramData\\\\Anaconda3\\\\envs\\\\pytorch\\\\Lib",
+        "D:\\\\ProgramData\\\\Anaconda3\\\\envs\\\\pytorch"
+    ]
+}
