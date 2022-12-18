@@ -120,7 +120,59 @@ int main()
 ## 方法三：使用function来实现Strategy
 
 ```c++
+#include<functional>
 
+class Context
+{
+public:
+    typedef std::function<int()> _Strategy;
+
+    explicit Context(_Strategy sg):_strategy{sg}
+    {}
+
+     int strategy()
+     {
+        //do some bussiness work
+        return _strategy();
+        //do some bussiness work
+     }
+private:
+    _Strategy _strategy; 
+};
+
+namespace Strategy
+{
+    using strategy = typename Context::_Strategy;
+
+    short func1(){return 1;}
+
+    int func2(){ return 2;}
+
+    double func3(){return 3;}
+
+}
+
+//client code
+void client()
+{
+    int a = 1;
+    Strategy::strategy mstrategy = Strategy::func3;
+    switch(a)
+    {
+        case 1:
+            mstrategy = Strategy::func1;
+            break;
+        case 2:
+            mstrategy = Strategy::func2;
+            break;
+        case 3:
+            mstrategy = Strategy::func3;
+            break;
+    };
+    
+    Context ConA(mstrategy);
+    std::cout<<mstrategy();
+}
 ```
 
 ## 总结 策略模式的优缺点
@@ -128,7 +180,7 @@ int main()
 ### 缺点  
 
 + 如果算法极少发生改变，那么没有理由引入新的类和接口，方法一只会让程序过于复杂，但是这种  
-比较传统的做法，对于很容易辨识  
+比较传统的做法，很容易辨识  
 + 客户端必须知晓策略间的差异-他需要选择合适的策略  
 + 许多现代编程语言支持函数类型功能，允许你在一组匿名函数中实现不同版本的算法。这样，你使  
 用这些函数的方式就和使用策略完全一样，无需借助额外的类和接口来保持代码的简洁性，如方法二  
