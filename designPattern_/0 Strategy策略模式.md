@@ -171,7 +171,7 @@ void client()
     };
     
     Context ConA(mstrategy);
-    std::cout<<mstrategy();
+    std::cout<<ConA.strategy();
 }
 ```
 
